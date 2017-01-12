@@ -1,11 +1,9 @@
-# apiTestingWithChakram
-==========================
+# Api Testing With Chakram
 Repo to check the response that we receive from different APIs.
 This tool is based in Chakram. Chakram runs on node.js and is distributed via NPM. 
  
 The Mocha test runner is used to run tests.
  
-
 # Requirements
  * Chakram: http://dareid.github.io/chakram/
  * Mocha  : http://mochajs.org/
