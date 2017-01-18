@@ -2,8 +2,11 @@ var chakram = require('chakram'),
     expect = chakram.expect;
 
 
-const spotifyEndpoint    = "https://api.spotify.com/v1/artists/0OdUWJ0sBjDrqHygGUXeCF";
-const mockSpotifyEndoint = "http://localhost:3000/artistMock";
+const spotifyEndpoint       = "https://api.spotify.com/v1/artists/0OdUWJ0sBjDrqHygGUXeCF";
+const spotifyRandomEndpoint = "https://api.spotify.com/v1/search?q=random&type=artist";
+
+const mockSpotifyEndoint    = "http://localhost:3000/artistMock";
+
 
 
 describe("Check if API's are running", function() {
@@ -31,3 +34,32 @@ describe("Check if API's have same data", function () {
             });
     });
 });
+
+describe("Check if API's have same schema", function () {
+    it("should check that the returned JSON object satisifies a JSON schema", function () {
+        var response = chakram.get(spotifyEndpoint);
+        expect(response).to.have.schema('external_urls', {"required": ["spotify"]});
+        return chakram.wait();
+    });
+});
+
+describe("Check if API has the correct schema", function () {
+    it("should return href, id, name and popularity for all found artists", function () {
+        var response = chakram.get(spotifyRandomEndpoint);
+        return expect(response).to.have.schema('artists.items', {
+            type: "array",
+            items: {
+                type: "object",
+                properties: {
+                    href: {type: "string"},
+                    id: {type: "string"},
+                    name: {type: "string"},
+                    popularity: {type: "integer"}
+                },
+                required: ["href", "id", "name", "popularity"]
+            }
+        })
+    });
+});
+
+
