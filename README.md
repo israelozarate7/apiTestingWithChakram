@@ -5,6 +5,7 @@ This tool is based in Chakram. Chakram runs on node.js and is distributed via NP
 The Mocha test runner is used to run tests.
  
 # Requirements
+ * Docker:  https://www.docker.com/products/overview
  * Chakram: http://dareid.github.io/chakram/
  * Mocha  : http://mochajs.org/
 
